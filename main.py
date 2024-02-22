@@ -2,7 +2,7 @@ import numpy as np
 import statsmodels.api as sm
 import pandas as pd
 from pandas import DataFrame
-from scipy.stats import chi2_contingency
+from scipy.stats import chi2
 
 # Read csv and Print Data
 df = pd.read_csv(r"C:\2023 Fall\Advanced Test\Group Projects\Mall_Customers.csv",header=0)
@@ -10,7 +10,7 @@ df = pd.read_csv(r"C:\2023 Fall\Advanced Test\Group Projects\Mall_Customers.csv"
 
 #Recode Gender into Binary Variables
 dummy_df = pd.get_dummies(df['Gender'], prefix='Gender')
-df = pd.concat([df,dummy_df], axis=1)
+df = pd.concat([df, dummy_df], axis=1)
 df: DataFrame = df.drop(columns=["Gender_Female",'Gender'])
 df['Gender_Male'] = df['Gender_Male'].astype(int)
 
@@ -54,7 +54,7 @@ income_category.columns = column_header
 
 #print(income_category)
 
-#Enter US Census Data and Perform the Chisquared test
+#Enter US Census Data and Perform the Chi Squared test
 expected_counts = np.array([31.4,
                     15.2,
                     21.2,
@@ -73,4 +73,16 @@ def chi2_test_stat(obs, exp):
     return(obs-exp)**2/exp
 
 income_category['Squared_Differences'] = chi2_test_stat(income_category['Observations'], income_category['Expected_Counts'])
+total = income_category.sum().to_dict()
+income_category.loc['Total'] = total
 print(income_category)
+chi2_test_value = income_category.iloc[6, 2]
+print('Test statistic of Chi Squared Test:', chi2_test_value)
+degrees_of_freedom = income_category.shape[0]-1
+alpha = 0.05
+crit_value = chi2.ppf(1-alpha, degrees_of_freedom)
+print('The critical value given alpha = 0.05 and df = 5 is:', crit_value)
+if chi2_test_value > crit_value:
+    print("Statistics suggest significant difference between mall customer income group and US census.")
+else:
+    print("Statistics fail to suggest significant difference between mall customer income group and US census.")
