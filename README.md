@@ -1,4 +1,4 @@
-This is a statistic project using R and open source datasets on Kaggle about mall customer segmentation. Please check out the link below for the source: 
+This is a statistic project primarily using R (Python coding is also included) and open source datasets on Kaggle about mall customer segmentation. Please check out the link below for the source: 
 https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python
 
 There are four main chapters of statistical analysis:
