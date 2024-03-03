@@ -1,3 +1,4 @@
+#Merging Test
 # Notes:
 # I. Using VIF to eliminate unneeded variables
 # II. Segment customers according to demographic attributes
