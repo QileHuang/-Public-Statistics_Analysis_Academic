@@ -1,4 +1,3 @@
-#Merging Test
 import numpy as np
 import statsmodels.api as sm
 import pandas as pd
